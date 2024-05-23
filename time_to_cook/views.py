@@ -1,5 +1,5 @@
-from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView
 
-class CreateTimeToCookAPIView(APIView):
+class CreateTimeToCookAPIView(CreateAPIView):
     def post(self, request):
         pass

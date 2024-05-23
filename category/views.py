@@ -1,5 +1,5 @@
-from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView
 
-class CreateCategoryAPIView(APIView):
+class CreateCategoryAPIView(CreateAPIView):
     def post(self, request):
         pass

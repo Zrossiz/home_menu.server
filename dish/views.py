@@ -1,5 +1,5 @@
-from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView
 
-class CreateDishAPIView(APIView):
+class CreateDishAPIView(CreateAPIView):
     def post(self, request):
         pass
