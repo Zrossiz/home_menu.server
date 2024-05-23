@@ -4,19 +4,18 @@ from rest_framework import status
 from .serializers import CategorySerializer
 
 class CreateCategoryAPIView(CreateAPIView):
+    serializer_class = CategorySerializer
+
     def post(self, request):
         try:
-            data = request.data
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
 
-            serializer = CategorySerializer(data=data)
-
-            if serializer.is_valid():
-                serializer.save()
-            
             return Response({
                 'success': True,
                 'data': serializer.data
-            })
+            }, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({
                 'success': False,
