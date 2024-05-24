@@ -1,6 +1,8 @@
-from rest_framework.views import APIView
 from .models import Dish
 from .serializers import DishSerializer
+
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -8,13 +10,13 @@ class DishAPIView(APIView):
 
     def get(self, request):
         try:
-            categories = Dish.objects.all()
-            serializer = DishSerializer(categories, many=True)
+            paginator = PageNumberPagination()
 
-            return Response({
-                'success': True,
-                'data': serializer.data
-            })
+            dishes = Dish.objects.all()
+            result_page = paginator.paginate_queryset(dishes, request)
+            serializer = DishSerializer(result_page, many=True)
+
+            return paginator.get_paginated_response(serializer.data)
         except Exception as e:
             return Response({
                 'success': False,
