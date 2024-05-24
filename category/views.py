@@ -71,3 +71,36 @@ class CategoryListAPIView(APIView):
                 'success': False,
                 'message': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            pk = kwargs.get('pk', None)
+
+            if not pk:
+                return Response({
+                    'success': False,
+                    'message': 'method put not allowed'
+                }, status=status.HTTP_404_NOT_FOUND)
+            
+        
+            try:
+                instance = Category.objects.get(pk=pk)
+                serializer = CategorySerializer(instance)
+                
+                instance.delete()
+            except:
+                return Response({
+                    'success': False,
+                    'message': 'object not found'
+                }, status=status.HTTP_404_NOT_FOUND)
+            
+            return Response({
+                'success': True,
+                'data': serializer.data
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            return Response({
+                'success': False,
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
