@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import CreateDishAPIView
+from .views import DishAPIView
 
 urlpatterns = [
-    path('', CreateDishAPIView.as_view())
+    path('', DishAPIView.as_view()),
+    path('<int:pk>/', DishAPIView.as_view())
 ]
