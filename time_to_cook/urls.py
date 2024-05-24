@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import CreateTimeToCookAPIView
+from .views import TimeToCookAPIView
 
 urlpatterns = [
-    path('', CreateTimeToCookAPIView.as_view())
+    path('', TimeToCookAPIView.as_view()),
+    path('<int:pk>/', TimeToCookAPIView.as_view())
 ]
