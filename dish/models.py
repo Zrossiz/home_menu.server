@@ -2,7 +2,6 @@ from django.db import models
 from category.models import Category
 from time_to_cook.models import TimeToCook
 
-# Create your models here.
 class Dish(models.Model):
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     time_to_cook_id = models.ForeignKey(TimeToCook, on_delete=models.DO_NOTHING)
