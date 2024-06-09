@@ -2,7 +2,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
-    image = models.CharField(max_length=300, blank=False, null=True)
+    slug = models.CharField(max_length=300)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
